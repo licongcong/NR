@@ -9,7 +9,7 @@
 \author{李聪聪}
 \institute{3GPP TS 38.202 V15.6.0}
 
-\version{0.1}
+\version{0.2}
 \date{\zhtoday}
 
 \usepackage{array}
@@ -52,7 +52,7 @@
 
 \subsection{上行模型}
 \subsubsection{上行共享信道}
-上行共享信道传输的物理层模型如图 \ref{PhysicalLayerModelForULSCHTransmission} 所示。图中蓝色部分显示的处理步骤表示它们可以通过高层配置。
+上行共享信道（UpLink Shared CHannel, UL-SCH）传输的物理层模型如图 \ref{PhysicalLayerModelForULSCHTransmission} 所示。图中蓝色部分显示的处理步骤表示它们可以通过高层配置。
 \begin{figure}[!htbp]
 	\centering
 	\includegraphics{PhysicalLayerModelForULSCHTransmission}
@@ -71,8 +71,8 @@
 	\item 支持 L1 控制和 HARQ 相关的信令
 \end{itemize}
 
-\subsection{随机接入信道}
-用于 RACH 传输的物理层模型的特征在于 PRACH 前导格式。如图 \ref{PrachPreambleFormat} 所示，该格式由循环前缀、前导码和保护时间组成。在此期间，不会传输任何信息。
+\subsubsection{随机接入信道}
+用于随机接入信道（Random Access CHannel, RACH）传输的物理层模型的特征在于 PRACH 前导格式。如图 \ref{PrachPreambleFormat} 所示，该格式由循环前缀、前导码和保护时间组成。在此期间，不会传输任何信息。
 
 \begin{figure}[!htbp]
 	\centering
@@ -80,6 +80,82 @@
 	\caption{PRACH 前导格式}
 	\label{PrachPreambleFormat}
 \end{figure}
+
+\subsection{下行模型}
+\subsubsection{下行共享信道}
+下行共享信道（DownLink Shared CHannel, DL-SCH）传输的物理层模型如图 \ref{PhysicalLayerModelForDLSCHTransmission} 所示。图中蓝色部分显示的处理步骤表示它们可以通过高层配置。
+\begin{figure}[!htbp]
+	\centering
+	\includegraphics{PhysicalLayerModelForDLSCHTransmission}
+	\caption{下行共享信道传输的物理层模型}
+	\label{PhysicalLayerModelForDLSCHTransmission}
+\end{figure}
+
+该模型中包括以下步骤：
+\begin{itemize}[leftmargin=2cm]
+	\item 传递到物理层或从物理层传递的高层数据
+	\item CRC 和传输块错误指示
+	\item 向前纠错编码和速率匹配
+	\item 数据调制
+	\item 物理资源映射
+	\item 多天线处理
+	\item 支持 L1 控制和 HARQ 相关的信令
+\end{itemize}
+
+\subsubsection{广播信道}
+广播信道（Broadcast CHannel, BCH）传输的物理层模型如图 \ref{PhysicalLayerModelForBCHTransmission} 所示。BCH 信道采用预定义的固定大小的传输格式，每 $80ms$ 有一个传输块。
+\begin{figure}[!htbp]
+	\centering
+	\includegraphics{PhysicalLayerModelForBCHTransmission}
+	\caption{广播信道传输的物理层模型}
+	\label{PhysicalLayerModelForBCHTransmission}
+\end{figure}
+
+该模型中包括以下步骤：
+\begin{itemize}[leftmargin=2cm]
+	\item 传递到物理层或从物理层传递的高层数据
+	\item CRC 和传输块错误指示
+	\item 向前纠错编码和速率匹配
+	\item 数据调制
+	\item 物理资源映射
+	\item 多天线处理
+\end{itemize}
+
+\subsubsection{寻呼信道}
+寻呼信道（Paging CHannel, PCH）传输的物理层模型如图 \ref{PhysicalLayerModelForPCHTransmission} 所示。PCH 承载在 PDSCH 上。图中蓝色部分显示的处理步骤表示它们可以通过高层配置。
+\begin{figure}[!htbp]
+	\centering
+	\includegraphics{PhysicalLayerModelForPCHTransmission}
+	\caption{寻呼信道传输的物理层模型}
+	\label{PhysicalLayerModelForPCHTransmission}
+\end{figure}
+
+该模型中包括以下步骤：
+\begin{itemize}[leftmargin=2cm]
+	\item 传递到物理层或从物理层传递的高层数据
+	\item CRC 和传输块错误指示
+	\item 向前纠错编码和速率匹配
+	\item 数据调制
+	\item 物理资源映射
+	\item 多天线处理
+\end{itemize}
+
+
+\section{物理信道和物理信号的同时发送和接收}
+根据 UE 的能力和服务要求，UE 需要同时发送和接收多个物理信道和物理信号。在接下来的上行链路和下行链路的描述中使用以下标记：
+\begin{itemize}[leftmargin=2cm]
+	\item $p$ 表示为 UE 配置的可以在其上发送物理信道的上行链路的载波数量
+	\item $p^{'}$ 表示为 UE 配置的可以在其上发送 SRS 的上行链路的载波数量
+	\item $q$ 表示为 UE 配置的下行链路的载波数量
+	\item $j$ 表示为 UE 配置的小区组的数量
+	\item $k$ 表示为 UE 配置的 PUCCH 组的数量
+\end{itemize}
+
+
+
+
+
+
 
 
 
