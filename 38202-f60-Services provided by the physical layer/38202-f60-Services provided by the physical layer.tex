@@ -3,13 +3,14 @@
 \usepackage{multirow}
 \usepackage{enumitem}
 \usepackage{caption}
+\usepackage{tabularx}
 
 \title{物理层提供的服务}
 
 \author{李聪聪}
 \institute{3GPP TS 38.202 V15.6.0}
 
-\version{0.2}
+\version{0.3}
 \date{\zhtoday}
 
 \usepackage{array}
@@ -151,9 +152,63 @@
 	\item $k$ 表示为 UE 配置的 PUCCH 组的数量
 \end{itemize}
 
+\subsection{上行链路}
+为了便于描述，将物理信道或探测参考信号及其相关的传输信道定义为不同的“传输类型”，如表 \ref{UplinkTransmissionTypes} 所示。
+\begin{table}[!htbp]
+	\centering
+	\resizebox{\textwidth}{!}{
+		\begin{tabular}{|c|c|c|c|}
+	\hline
+	传输类型                          & 物理信道或探测参考信号                          & 相关传输信道                          & 注释                             \\ \hline
+	A                             & PRACH                                & RACH                            & Note 1                         \\ \hline
+	B                             & PUCCH                                & N/A                             &                                \\ \hline
+	C                             & PUSCH                                & UL-SCH                          & Note 2                         \\ \hline
+	D                             & SRS                                  & N/A                             &                                \\ \hline
+	\multicolumn{4}{|l|}{\begin{tabular}[c]{@{}l@{}}Note 1: 这里的 RACH 指的是基于竞争的随机接入\\ Note 2: UCI 可以直接通过 PUSCH 发送，而不需要经过 UL-SCH\end{tabular}} \\ \hline
+	\end{tabular}
+	}
+
+	\caption{上行链路传输类型}
+	\label{UplinkTransmissionTypes}
+\end{table}
 
 
+基于 UE 能力的限制，UE 可以支持以下传输类型的组合。如表 \ref{UplinkTransmissionTypesCombinations}。
 
+\begin{table}[!htbp]
+	\centering
+	\resizebox{\textwidth}{!}{
+	\begin{tabular}{|p{0.5 \textwidth}<{\centering}|c|}
+	\hline
+	支持的组合 													& 注释  				\\ \hline 
+	$j \times A$    											& Note 1  			\\ \hline
+	$k \times B$  												& Note 2   		 	\\ \hline
+	$p \times C$    											& Note 3, Note 4 	\\ \hline
+	$p^{'} \times D$ 											& Note 3, Note 5    \\ \hline
+	$\widetilde{j} \times A + \widetilde{k} \times B$  			& Note 6  			\\ \hline
+	$\widetilde{j} \times A + \widetilde{p} \times C$  			& Note 6  			\\ \hline
+	$\widetilde{j} \times A + \widetilde{p}^{'} \times D$    	& Note 6    		\\ \hline
+	$\widehat{k} \times B + \widehat{p} \times C$            	& Note 8     		\\ \hline
+	$\widetilde{k} \times B + \widetilde{p}^{'} \times D$    	& Note 7      		\\ \hline
+	$\widetilde{p} \times C + \widetilde{p}^{'} \times D$    	& Note 7       		\\ \hline
+	\multicolumn{2}{|l|}{
+		\begin{tabularx}{\textwidth}{X}
+		注1：组合中的小区组$j$的数量取决于 UE 的能力。\\ 
+		注2：组合中的 PUCCH 组的数量 $k$ 取决于 UE 的能力。\\ 
+		注3：组合中的载波数量 $p$ 和 $p^{'}$ 取决于UE的能力。\\ 
+		注4：如果有一个 SUL 载波，则将只支持 $p-1$ 个 PUSCH。 \\ 
+		注5：UE可以配置为 $p^{'}$，但 UE 的能力可能并不支持。\\ 
+		注6：仅在带间CA的情况下才支持在 PUCCH（或PUSCH或SRS）同时进行PRACH，$\widetilde{j} \leq j$，$\widetilde{k} \leq k$，$\widetilde{p} \leq p$ 且 $\widetilde{p}^{'} \leq p^{'}$取决于配置，并取决于UE进行并行传输的能力。\\ 
+		注7：仅在带间CA的情况下，才支持带有PUCCH（或PUSCH）的同时SRS， 其中$\widetilde{k} \leq k$，$\widetilde{p} \leq p$和$\widetilde{p}^{'} \leq p^{'}$取决于配置，并且取决于UE并行传输能力。\\ 
+		注8：仅在配置了多个PUCCH组并且在不同的PUCCH组中发送各个PUCCH和PUSCH的情况下才支持同时PUCCH和PUSCH，且 $\widehat{k} < k$并且$\widehat{p} \leq p$。 $k$和$p$分别受UE功能支持的PUCCH组和UL载波数量的影响。 $\widehat{k}$和$\widehat{p}$取决于配置。
+		\end{tabularx}}
+		\\ \hline
+	\end{tabular}}
+	\caption{ 上行传输类型组合}
+	\label{UplinkTransmissionTypesCombinations}
+\end{table}
+
+关于 UE 能力的更多内容可以参考 3GPP TS 38.306: "NR; User Equipment (UE) radio access capabilities"。
 
 
 
