@@ -10,7 +10,7 @@
 \author{李聪聪}
 \institute{3GPP TS 38.202 V15.6.0}
 
-\version{0.3}
+\version{0.4}
 \date{\zhtoday}
 
 \usepackage{array}
@@ -210,9 +210,44 @@
 
 关于 UE 能力的更多内容可以参考 3GPP TS 38.306: "NR; User Equipment (UE) radio access capabilities"。
 
+\newpage
 
+\subsection{下行链路}
+表 \ref{DownlinkReceptionTypes}定义了 UE 在下行链路上可以接收的物理信道的类型。表 \ref{DownlinkReceptionTypesCombinations} 描述了 UE 可以在下行信道上同时接收物理信道的组合。UE 所能接收的信道类型的组合取决于其能力。UE 应该有能力根据 PDCCH 上的指示接收所有 TB 块。
 
-
+\begin{table}[!htbp]
+	\centering
+	\resizebox{\textwidth}{!}{
+	\begin{tabular}{|c|c|c|c|c|}
+	\hline
+	接收类型 & 物理信道          & RNTI                        & 相关传输信道 & 注释             \\ \hline
+	A    & PBCH          & N/A                         & BCH    &                \\ \hline
+	B    & PDCCH + PDSCH & SI-RNTI                     & DL-SCH & Note 1         \\ \hline
+	C0   & PDCCH         & P-RNTI                      & N/A    & Note 1, Note 2 \\ \hline
+	C1   & PDCCH + PDSCH & P-RNTI                      & PCH    & Note 1         \\ \hline
+	D0   & PDCCH + PDSCH & RA-RNTI or Temporary C-RNTI & DL-SCH & Note 3         \\ \hline
+	D1   & PDCCH + PDSCH & C-RNTI, CS-RNTI, MCS-C-RNTI & DL-SCH &                \\ \hline
+	D2   & PDCCH         & C-RNTI, CS-RNTI, MCS-C-RNTI & DL-SCH &                \\ \hline
+	E    & PDCCH         & C-RNTI                      & N/A    & Note 4         \\ \hline
+	F0   & PDCCH         & Temporary C-RNTI            & UL-SCH &                \\ \hline
+	F1   & PDCCH         & C-RNTI, CS-RNTI, MCS-C-RNTI & UL-SCH &                \\ \hline
+	G    & PDCCH         & SFI-RNTI                    & N/A    &                \\ \hline
+	H    & PDCCH         & INT-RNTI                    & N/A    &                \\ \hline
+	J0   & PDCCH         & TPC-PUSCH-RNTI              & N/A    &                \\ \hline
+	J1   & PDCCH         & TPC-PUCCH-RNTI              & N/A    &                \\ \hline
+	J2   & PDCCH         & TPC-SRS-RNTI                & N/A    &                \\ \hline
+	K    & PDCCH         & SP-CSI-RNTI                 & N/A    &                \\ \hline
+	\multicolumn{5}{|l|}{\begin{tabular}[c]{@{}l@{}}
+	Note 1: 这些信息仅从 PCell 上接收。\\ 
+	Note 2: 在某些情况下，仅要求 UE 使用 P-RNTI 监控 DCI 中的短消息。\\ 
+	Note 3: 这些信息可以从 PCell 上接收，也可以从 PSCell 上接收。\\ 
+	Note 4: 对应于 PDCCH-ordered 的 PRACH。
+	\end{tabular}} \\ 
+	\hline
+	\end{tabular}}
+	\caption{下行链路接收类型}
+	\label{DownlinkReceptionTypes}
+\end{table}
 
 
 
