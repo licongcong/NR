@@ -154,6 +154,8 @@
 
 \subsection{上行链路}
 为了便于描述，将物理信道或探测参考信号及其相关的传输信道定义为不同的“传输类型”，如表 \ref{UplinkTransmissionTypes} 所示。
+
+
 \begin{table}[!htbp]
 	\centering
 	\resizebox{\textwidth}{!}{
@@ -213,7 +215,7 @@
 \newpage
 
 \subsection{下行链路}
-表 \ref{DownlinkReceptionTypes}定义了 UE 在下行链路上可以接收的物理信道的类型。表 \ref{DownlinkReceptionTypesCombinations} 描述了 UE 可以在下行信道上同时接收物理信道的组合。UE 所能接收的信道类型的组合取决于其能力。UE 应该有能力根据 PDCCH 上的指示接收所有 TB 块。
+表 \ref{DownlinkReceptionTypes} 定义了 UE 在下行链路上可以接收的物理信道的类型。表 \ref{DownlinkReceptionTypesCombinations} 描述了 UE 可以在下行信道上同时接收物理信道的组合。UE 所能接收的信道类型的组合取决于其能力。UE 应该有能力根据 PDCCH 上的指示接收所有 TB 块。
 
 \begin{table}[!htbp]
 	\centering
@@ -250,7 +252,27 @@
 \end{table}
 
 
-
+\begin{table}[!htbp]
+\centering
+\resizebox{\textwidth}{!}{
+	\begin{tabular}{|c|c|c|c|}
+	\hline
+	\multicolumn{3}{|c|}{支持的组合}                       & 注释     \\ \hline
+	PCell                            & PSCell & SCell &        \\ \hline
+	\multicolumn{4}{|l|}{1. RRC\_IDLE}                         \\ \hline
+	A + (B and/or C1 and/or D0) + F0 &        &       & Note 1 \\ \hline
+	\multicolumn{4}{|l|}{2. RRC\_INACTIVE}                     \\ \hline
+	A + (B and/or C1 and/or D0) + F0 &        &       & Note 1 \\ \hline
+	\multicolumn{4}{|l|}{3. RRC\_CONNECTED}                    \\ \hline
+	\begin{tabular}[c]{@{}c@{}}A + C0 + (B and/or (D0 or (D1 + m*D2)))\\ + E + F0 + n*F1 + G + H + J0 + J1 + J2 + K\end{tabular} &
+	  \begin{tabular}[c]{@{}c@{}}A + (D0 or (D1 + mD2)) + E + F0\\ + n*F1 + G + H + J0 + J1 + J2 + K\end{tabular} &
+	  \begin{tabular}[c]{@{}c@{}}D1 + m*D2 + E + n*F1 + G \\ + H + J0 + J1 + J2 + K\end{tabular} &
+	  \begin{tabular}[c]{@{}c@{}}Note 2, Note 3,\\ Note 4\end{tabular} \\ \hline
+	\multicolumn{4}{|l|}{\begin{tabular}[c]{@{}l@{}}Note 1: UE 并不需要同时解码两个以上的 PDSCH。当 UE 接收到两个以上的 PDSCH 时，解码 PDSCH 的优先级取决于 UE 的实现。\\ Note 2: 当 PCell 在 FR1 频段时，UE 需要同时解码 SI-RNTI 加扰的 PDSCH 和 C-RNTI 加扰的 PDSCH。\\ Note 3: 所支持的组合取决于 UE 的能力：双链接、载波聚合、组 TPC 命令的接收、先占指示和动态 SFI 监视。\\ Note 4: 支持的组合中，$m \geq 0$ 和 $n \geq 0$，$m$ 和 $n$ 的值取决于 UE 的能力。\end{tabular}} \\ \hline
+	\end{tabular}}
+	\caption{下行链路接收类型组合}
+	\label{DownlinkReceptionTypesCombinations}
+\end{table}
 
 
 
